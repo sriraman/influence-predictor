@@ -1,5 +1,15 @@
 <?php
 
+
+$alchemy_api_key = 0 // Enter your alchemy api key here... Get your key here (http://www.alchemyapi.com/api/register.html) 
+
+if($alchemy_api_key==0)
+{
+	alert("Paste your alchemy api key in influence-predictor.php");
+}
+else
+{
+
 $query = $_GET['q']; // Query for search
 
 $link = "http://api2.socialmention.com/search?q=".$query."&f=json&t=microblogs&lang=fr"; // Generating social mention API link with query
@@ -36,7 +46,7 @@ foreach ($items as $index => $item) {
 
 $url = str_replace("http://","",$url);
 
-$alchemyjson=file_get_contents("http://access.alchemyapi.com/calls/url/URLGetTextSentiment?url=$url&apikey=0a75db5f3e43409fc38c6c993f70cc14c0800ce3&outputMode=json");
+$alchemyjson=file_get_contents("http://access.alchemyapi.com/calls/url/URLGetTextSentiment?url=$url&apikey=".$alchemy_api_key."&outputMode=json");
 
 $sc = json_decode($alchemyjson,true);
 
@@ -59,5 +69,8 @@ else
 echo "</table>";
 
 echo "Total positive score => $pos <br> Total Negative score => $neg";
+
+
+}
 
 ?>
